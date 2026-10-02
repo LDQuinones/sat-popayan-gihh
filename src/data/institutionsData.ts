@@ -7,14 +7,14 @@ export const institutions: InstitutionBulletin[] = [
     fullName: 'Corporación Autónoma Regional del Cauca',
     description: 'Autoridad ambiental regional del Cauca',
     url: 'https://crc.gov.co',
-    bulletinUrl: 'https://crc.gov.co/index.php/ambiental/recurso-hidrico',
+    bulletinUrl: 'https://experience.arcgis.com/experience/2262ffcc4ba349aa90e1ab6b2b5a9095/page/Gesti%C3%B3n-del-Riesgo',
     colorClass: 'border-green-500/40 bg-green-500/5 text-green-400',
     latestBulletin: {
-      title: 'Monitoreo Recurso Hídrico Cuenca del Río Cauca',
+      title: 'Geoportal de Gestión del Riesgo y Recurso Hídrico — Cuenca Cauca',
       date: '2026-10-01',
       summary:
-        'Se reportan niveles estables en los principales afluentes del río Cauca. Se mantiene vigilancia sobre las subcuencas Molino, Pubús y Saté por incrementos pluviométricos.',
-      bulletinNumber: 'BH-CRC-2026-087',
+        'Monitoreo espacial continuo de amenazas hidrológicas y cuencas abastecedoras en el departamento del Cauca.',
+      bulletinNumber: 'GEO-CRC-2026-GR',
     },
   },
   {
@@ -23,8 +23,7 @@ export const institutions: InstitutionBulletin[] = [
     fullName: 'Instituto de Hidrología, Meteorología y Estudios Ambientales',
     description: 'Pronósticos hidrometeorológicos nacionales',
     url: 'https://www.ideam.gov.co',
-    bulletinUrl:
-      'http://www.ideam.gov.co/web/pronosticos-y-alertas/boletines-e-informes-tecnicos',
+    bulletinUrl: 'https://www.ideam.gov.co/sala-de-prensa/boletines',
     colorClass: 'border-blue-500/40 bg-blue-500/5 text-blue-400',
     latestBulletin: {
       title: 'Boletín de Predicción Climática y Alertas — Octubre 2026',
@@ -73,7 +72,7 @@ export const institutions: InstitutionBulletin[] = [
     fullName: 'Servicio Geológico Colombiano',
     description: 'Monitoreo volcánico y sismología',
     url: 'https://www.sgc.gov.co',
-    bulletinUrl: 'https://www.sgc.gov.co/Noticias',
+    bulletinUrl: 'https://www2.sgc.gov.co/Noticias/Paginas/Historico-de-noticias.aspx',
     colorClass: 'border-red-500/40 bg-red-500/5 text-red-400',
     latestBulletin: {
       title: 'Boletín de Actividad Volcán Puracé — Nivel Amarillo',
@@ -86,11 +85,10 @@ export const institutions: InstitutionBulletin[] = [
   {
     id: 'dimar',
     acronym: 'DIMAR',
-    fullName: 'Dirección General Marítima',
-    description: 'Boletines meteorológicos marítimos y fluviales',
+    fullName: 'Dirección General Marítima (CIOH)',
+    description: 'Centro de Investigaciones Oceanográficas e Hidrográficas. Condiciones meteomarinas y fluviales del Pacífico colombiano.',
     url: 'https://www.dimar.mil.co',
-    bulletinUrl:
-      'https://www.dimar.mil.co/content/boletines-meteorol%C3%B3gicos-marinos',
+    bulletinUrl: 'https://cioh.dimar.mil.co/index.php/es/',
     colorClass: 'border-cyan-500/40 bg-cyan-500/5 text-cyan-400',
     latestBulletin: {
       title: 'Boletín Meteorológico Marino — Pacífico Colombiano',

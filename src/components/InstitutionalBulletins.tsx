@@ -44,7 +44,7 @@ const INSTITUTIONS: Institution[] = [
     fullName: 'Corporación Autónoma Regional del Cauca',
     description: 'Autoridad ambiental regional del departamento del Cauca. Monitoreo y conservación de cuencas hidrográficas prioritarias.',
     url: 'https://crc.gov.co',
-    bulletinUrl: 'https://crc.gov.co/index.php/ambiental/recurso-hidrico',
+    bulletinUrl: 'https://experience.arcgis.com/experience/2262ffcc4ba349aa90e1ab6b2b5a9095/page/Gesti%C3%B3n-del-Riesgo',
     icon: Landmark,
     borderLight: 'border-emerald-200 hover:border-emerald-400',
     borderDark: 'dark:border-emerald-500/30 dark:hover:border-emerald-500/60',
@@ -55,10 +55,10 @@ const INSTITUTIONS: Institution[] = [
     badgeLight: 'bg-emerald-100/80 text-emerald-900 border-emerald-300',
     badgeDark: 'dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-700/50',
     latestBulletin: {
-      title: 'Monitoreo Recurso Hídrico — Cuenca del Río Cauca',
+      title: 'Geoportal de Gestión del Riesgo y Recurso Hídrico — Cuenca Cauca',
       date: '1 de octubre de 2026',
-      summary: 'Se reportan niveles estables en los principales afluentes del río Cauca. Se mantiene vigilancia sobre las subcuencas Molino, Pubús y Saté por incrementos pluviométricos.',
-      bulletinNumber: 'BH-CRC-2026-087'
+      summary: 'Monitoreo espacial continuo de amenazas hidrológicas y cuencas abastecedoras en el departamento del Cauca.',
+      bulletinNumber: 'GEO-CRC-2026-GR'
     }
   },
   {
@@ -67,7 +67,7 @@ const INSTITUTIONS: Institution[] = [
     fullName: 'Instituto de Hidrología, Meteorología y Estudios Ambientales',
     description: 'Autoridad científica nacional que suministra información y alertas hidrometeorológicas oficiales para la toma de decisiones.',
     url: 'https://www.ideam.gov.co',
-    bulletinUrl: 'http://www.ideam.gov.co/web/pronosticos-y-alertas/boletines-e-informes-tecnicos',
+    bulletinUrl: 'https://www.ideam.gov.co/sala-de-prensa/boletines',
     icon: Building2,
     borderLight: 'border-blue-200 hover:border-blue-400',
     borderDark: 'dark:border-blue-500/30 dark:hover:border-blue-500/60',
@@ -80,7 +80,7 @@ const INSTITUTIONS: Institution[] = [
     latestBulletin: {
       title: 'Boletín de Predicción Climática y Alertas — Octubre 2026',
       date: '30 de septiembre de 2026',
-      summary: 'Condiciones de La Niña débil persisten sobre el Pacífico ecuatorial. Se prevén lluvias por encima del promedio en la región andina suroccidental durante las próximas dos semanas.',
+      summary: 'Condiciones de La Niña débil persisten sobre el Pacífico ecuatorial. Se prevén lluvias por encima del promedio en la región andina suroccidental.',
       bulletinNumber: 'BP-IDEAM-2026-274'
     }
   },
@@ -136,7 +136,7 @@ const INSTITUTIONS: Institution[] = [
     fullName: 'Servicio Geológico Colombiano',
     description: 'Monitoreo e investigación de amenazas geológicas, sísmicas y de la actividad volcánica del complejo Puracé - Coconucos.',
     url: 'https://www.sgc.gov.co',
-    bulletinUrl: 'https://www.sgc.gov.co/Noticias',
+    bulletinUrl: 'https://www2.sgc.gov.co/Noticias/Paginas/Historico-de-noticias.aspx',
     icon: Mountain,
     borderLight: 'border-rose-200 hover:border-rose-400',
     borderDark: 'dark:border-rose-500/30 dark:hover:border-rose-500/60',
@@ -156,10 +156,10 @@ const INSTITUTIONS: Institution[] = [
   {
     id: 'dimar',
     acronym: 'DIMAR',
-    fullName: 'Dirección General Marítima',
-    description: 'Regula, vigila y monitorea las condiciones hidrometeorológicas marítimas, estuarinas y fluviales del Pacífico colombiano.',
+    fullName: 'Dirección General Marítima (CIOH)',
+    description: 'Centro de Investigaciones Oceanográficas e Hidrográficas. Condiciones meteomarinas y fluviales del Pacífico colombiano.',
     url: 'https://www.dimar.mil.co',
-    bulletinUrl: 'https://www.dimar.mil.co/content/boletines-meteorol%C3%B3gicos-marinos',
+    bulletinUrl: 'https://cioh.dimar.mil.co/index.php/es/',
     icon: Anchor,
     borderLight: 'border-cyan-200 hover:border-cyan-400',
     borderDark: 'dark:border-cyan-500/30 dark:hover:border-cyan-500/60',
