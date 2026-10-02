@@ -43,7 +43,7 @@ const createRiskIcon = (risk: RiskLevel) => {
       <circle cx="14" cy="14" r="7" fill="${c.fill}" stroke="white" stroke-width="2.5"/>
     </svg>`;
 
-  const svgUrl = `data:image/svg+xml;base64,${btoa(svg)}`;
+  const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg.trim())}`;
 
   return L.icon({
     iconUrl: svgUrl,
