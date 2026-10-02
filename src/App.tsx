@@ -14,7 +14,10 @@ import {
   ExternalLink, 
   BookOpen,
   Award,
-  Users2
+  Users2,
+  Table,
+  FileSpreadsheet,
+  ArrowRight
 } from 'lucide-react';
 import { useSATData } from './hooks/useSATData';
 import { useTheme } from './hooks/useTheme';
@@ -24,11 +27,15 @@ import { SubcuencasList } from './components/SubcuencasList';
 import { ProvenanceModal } from './components/ProvenanceModal';
 import { InstallPrompt } from './components/InstallPrompt';
 import { InstitutionalBulletins } from './components/InstitutionalBulletins';
+import { DataExplorerView } from './components/DataExplorerView';
 import type { RiskLevel, Subcuenca, DataSourceProvenance } from './types/sat';
 
 export function App() {
   const { subcuencas, summary, isLoading, hasNewData, refreshData } = useSATData();
   const { theme, toggleTheme } = useTheme();
+
+  // Estado para alternar entre el SAT Principal y el Explorador de Tablas de Datos
+  const [currentView, setCurrentView] = useState<'sat' | 'explorer'>('sat');
 
   const [selectedSubcuencaId, setSelectedSubcuencaId] = useState<string | null>('rio-molino');
   const [filterRisk, setFilterRisk] = useState<RiskLevel | 'todas'>('todas');
@@ -69,6 +76,11 @@ export function App() {
     }
   };
 
+  // Si el usuario está en la vista del Explorador de Datos, mostramos DataExplorerView a pantalla completa
+  if (currentView === 'explorer') {
+    return <DataExplorerView onBackToMain={() => setCurrentView('sat')} />;
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 flex flex-col transition-colors duration-200">
       
@@ -103,7 +115,6 @@ export function App() {
           
           {/* Identidad Institucional y Escudo */}
           <div className="flex items-center space-x-3 min-w-0">
-            {/* Escudo Universidad del Cauca */}
             <a 
               href="https://www.unicauca.edu.co" 
               target="_blank" 
@@ -135,6 +146,16 @@ export function App() {
 
           {/* Controles de cabecera */}
           <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
+            {/* Pestaña / Botón de acceso directo a la vista de Tablas y Series */}
+            <button
+              onClick={() => setCurrentView('explorer')}
+              className="flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 bg-red-900 hover:bg-red-800 text-white rounded-lg shadow-xs transition cursor-pointer"
+              title="Abrir explorador de tablas de datos, series temporales y descargas CSV"
+            >
+              <Table className="w-4 h-4" />
+              <span className="hidden sm:inline">Tablas & Series</span>
+            </button>
+
             {/* Enlace Institucional Directo Unicauca */}
             <a
               href="https://www.unicauca.edu.co"
@@ -180,7 +201,7 @@ export function App() {
               className="hidden md:flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-lg transition cursor-pointer"
             >
               <Info className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400" />
-              <span>Transparencia & Metrología</span>
+              <span>Metrología</span>
             </button>
           </div>
         </div>
@@ -206,14 +227,25 @@ export function App() {
               </p>
             </div>
 
-            {/* Botón de acceso rápido al monitoreo */}
-            <button
-              onClick={scrollToAlerts}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-red-900 dark:text-red-300 hover:text-red-950 dark:hover:text-red-200 bg-red-50 dark:bg-red-950/50 hover:bg-red-100 dark:hover:bg-red-900/60 px-3 py-1.5 rounded-lg border border-red-200 dark:border-red-800/60 transition cursor-pointer self-start sm:self-auto"
-            >
-              <span>Ver Monitoreo de Cuencas en Vivo</span>
-              <ChevronDown className="w-3.5 h-3.5" />
-            </button>
+            <div className="flex items-center gap-2 flex-wrap">
+              {/* Botón de acceso rápido a tablas de datos */}
+              <button
+                onClick={() => setCurrentView('explorer')}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 transition cursor-pointer"
+              >
+                <Table className="w-3.5 h-3.5 text-red-800 dark:text-red-400" />
+                <span>Explorar Tablas Históricas</span>
+              </button>
+
+              {/* Botón de acceso rápido al monitoreo */}
+              <button
+                onClick={scrollToAlerts}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-red-900 dark:text-red-300 hover:text-red-950 dark:hover:text-red-200 bg-red-50 dark:bg-red-950/50 hover:bg-red-100 dark:hover:bg-red-900/60 px-3 py-1.5 rounded-lg border border-red-200 dark:border-red-800/60 transition cursor-pointer"
+              >
+                <span>Monitoreo en Vivo</span>
+                <ChevronDown className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
 
           {/* Grilla de Boletines */}
@@ -290,7 +322,7 @@ export function App() {
             {/* Columna Izquierda: Información Académica y Scienti MinCiencias */}
             <div className="lg:col-span-8 space-y-5">
               
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 flex-wrap">
                 <span className="px-3 py-1 rounded-full text-xs font-bold bg-red-100 text-red-900 dark:bg-red-950/60 dark:text-red-300 border border-red-200 dark:border-red-800/60 inline-flex items-center gap-1.5">
                   <GraduationCap className="w-4 h-4" /> MinCiencias: COL0010048
                 </span>
@@ -402,6 +434,34 @@ export function App() {
           </div>
         </section>
 
+        {/* ======================================================== */}
+        {/* 4. BANNER / PESTAÑA INFERIOR DE ACCESO A TABLAS DE DATOS */}
+        {/* ======================================================== */}
+        <section className="bg-gradient-to-r from-red-950 via-slate-900 to-blue-950 text-white rounded-3xl p-6 sm:p-8 border border-red-800/40 shadow-md">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="space-y-2 text-center md:text-left">
+              <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30 inline-flex items-center gap-1.5 uppercase tracking-wider">
+                <FileSpreadsheet className="w-3.5 h-3.5" /> Repositorio Histórico Abierto
+              </span>
+              <h3 className="text-xl sm:text-2xl font-black text-white">
+                Tablas de Datos, Series Temporales y Exportación
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+                Inspecciona series hidrométricas filtradas por día, mes, año o histórico completo. Visualiza registros organizados por autor/custodio (GIHH, IDEAM, CRC, LoRaWAN), clasificados por fecha, tipo de dato y valor medido, con descarga directa en formato <strong>CSV</strong> y reportes técnicos certificados.
+              </p>
+            </div>
+
+            <button
+              onClick={() => setCurrentView('explorer')}
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-red-700 hover:bg-red-600 text-white rounded-2xl text-sm font-bold shadow-lg shadow-red-950/50 hover:scale-105 transition-all cursor-pointer shrink-0"
+            >
+              <Table className="w-5 h-5" />
+              <span>Abrir Explorador de Datos</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </section>
+
       </main>
 
       {/* Footer Institucional Unicauca */}
@@ -423,7 +483,14 @@ export function App() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4 text-xs">
+          <div className="flex items-center gap-4 text-xs flex-wrap justify-center">
+            <button
+              onClick={() => setCurrentView('explorer')}
+              className="hover:text-red-800 dark:hover:text-red-400 font-bold underline decoration-slate-300 cursor-pointer"
+            >
+              Ver Tablas de Datos
+            </button>
+            <span>·</span>
             <a 
               href="https://www.unicauca.edu.co" 
               target="_blank" 

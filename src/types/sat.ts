@@ -80,3 +80,24 @@ export interface InstitutionBulletin {
   colorClass: string;
   latestBulletin: LatestBulletin;
 }
+
+// Estructura para registros de series históricas y telemetría granular
+export type DataTypeCategory = 'Nivel de Lámina' | 'Caudal' | 'Precipitación' | 'Turbiedad' | 'Temperatura Agua';
+
+export interface HistoricalTelemetryRecord {
+  id: string;
+  timestamp: string; // ISO 8601
+  formattedDate: string;
+  time: string;
+  subcuencaId: string;
+  subcuencaName: string;
+  stationId: string;
+  stationName: string;
+  author: 'GIHH - Unicauca' | 'IDEAM' | 'CRC' | 'Red Comunitaria LoRaWAN';
+  dataType: DataTypeCategory;
+  measuredValue: number;
+  unit: string;
+  qualityFlag: 'Conforme' | 'Estimado' | 'Verificado' | 'Alerta Umbral';
+}
+
+export type TimeIntervalFilter = 'dia' | 'mes' | 'anio' | 'historico' | 'personalizado';
