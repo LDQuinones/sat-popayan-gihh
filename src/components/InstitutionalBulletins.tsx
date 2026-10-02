@@ -1,4 +1,15 @@
-import { ExternalLink, Globe, FileText, CalendarDays, Hash } from 'lucide-react';
+import { 
+  ExternalLink, 
+  FileText, 
+  CalendarDays, 
+  Hash, 
+  Building2, 
+  Landmark, 
+  Compass, 
+  AlertOctagon, 
+  Mountain, 
+  Anchor 
+} from 'lucide-react';
 
 interface BulletinInfo {
   title: string;
@@ -14,9 +25,15 @@ interface Institution {
   description: string;
   url: string;
   bulletinUrl: string;
-  borderColor: string;
-  textColor: string;
-  bgColor: string;
+  icon: typeof Building2;
+  borderLight: string;
+  borderDark: string;
+  textLight: string;
+  textDark: string;
+  bgLight: string;
+  bgDark: string;
+  badgeLight: string;
+  badgeDark: string;
   latestBulletin: BulletinInfo;
 }
 
@@ -25,12 +42,18 @@ const INSTITUTIONS: Institution[] = [
     id: 'crc',
     acronym: 'CRC',
     fullName: 'Corporación Autónoma Regional del Cauca',
-    description: 'Autoridad ambiental regional del Cauca. Monitoreo de recurso hídrico y cuencas hidrográficas.',
+    description: 'Autoridad ambiental regional del departamento del Cauca. Monitoreo y conservación de cuencas hidrográficas prioritarias.',
     url: 'https://crc.gov.co',
     bulletinUrl: 'https://crc.gov.co/index.php/ambiental/recurso-hidrico',
-    borderColor: 'border-green-500/40',
-    textColor: 'text-green-400',
-    bgColor: 'bg-green-500/5',
+    icon: Landmark,
+    borderLight: 'border-emerald-200 hover:border-emerald-400',
+    borderDark: 'dark:border-emerald-500/30 dark:hover:border-emerald-500/60',
+    textLight: 'text-emerald-800',
+    textDark: 'dark:text-emerald-400',
+    bgLight: 'bg-emerald-50/40',
+    bgDark: 'dark:bg-emerald-950/20',
+    badgeLight: 'bg-emerald-100/80 text-emerald-900 border-emerald-300',
+    badgeDark: 'dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-700/50',
     latestBulletin: {
       title: 'Monitoreo Recurso Hídrico — Cuenca del Río Cauca',
       date: '1 de octubre de 2026',
@@ -42,12 +65,18 @@ const INSTITUTIONS: Institution[] = [
     id: 'ideam',
     acronym: 'IDEAM',
     fullName: 'Instituto de Hidrología, Meteorología y Estudios Ambientales',
-    description: 'Pronósticos hidrometeorológicos nacionales, alertas y boletines climáticos oficiales.',
+    description: 'Autoridad científica nacional que suministra información y alertas hidrometeorológicas oficiales para la toma de decisiones.',
     url: 'https://www.ideam.gov.co',
     bulletinUrl: 'http://www.ideam.gov.co/web/pronosticos-y-alertas/boletines-e-informes-tecnicos',
-    borderColor: 'border-blue-500/40',
-    textColor: 'text-blue-400',
-    bgColor: 'bg-blue-500/5',
+    icon: Building2,
+    borderLight: 'border-blue-200 hover:border-blue-400',
+    borderDark: 'dark:border-blue-500/30 dark:hover:border-blue-500/60',
+    textLight: 'text-blue-800',
+    textDark: 'dark:text-blue-400',
+    bgLight: 'bg-blue-50/40',
+    bgDark: 'dark:bg-blue-950/20',
+    badgeLight: 'bg-blue-100/80 text-blue-900 border-blue-300',
+    badgeDark: 'dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-700/50',
     latestBulletin: {
       title: 'Boletín de Predicción Climática y Alertas — Octubre 2026',
       date: '30 de septiembre de 2026',
@@ -59,12 +88,18 @@ const INSTITUTIONS: Institution[] = [
     id: 'igac',
     acronym: 'IGAC',
     fullName: 'Instituto Geográfico Agustín Codazzi',
-    description: 'Cartografía, georreferenciación nacional y zonificación de amenazas territoriales.',
+    description: 'Entidad rectora de la cartografía básica digital, georreferenciación y delimitación fisiográfica del territorio colombiano.',
     url: 'https://www.igac.gov.co',
     bulletinUrl: 'https://www.igac.gov.co/noticias',
-    borderColor: 'border-amber-500/40',
-    textColor: 'text-amber-400',
-    bgColor: 'bg-amber-500/5',
+    icon: Compass,
+    borderLight: 'border-amber-200 hover:border-amber-400',
+    borderDark: 'dark:border-amber-500/30 dark:hover:border-amber-500/60',
+    textLight: 'text-amber-800',
+    textDark: 'dark:text-amber-400',
+    bgLight: 'bg-amber-50/40',
+    bgDark: 'dark:bg-amber-950/20',
+    badgeLight: 'bg-amber-100/80 text-amber-900 border-amber-300',
+    badgeDark: 'dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-700/50',
     latestBulletin: {
       title: 'Actualización Cartográfica de Zonas de Riesgo Hídrico',
       date: '28 de septiembre de 2026',
@@ -76,12 +111,18 @@ const INSTITUTIONS: Institution[] = [
     id: 'ungrd',
     acronym: 'UNGRD',
     fullName: 'Unidad Nacional para la Gestión del Riesgo de Desastres',
-    description: 'Coordinación nacional para la gestión del riesgo, respuesta ante emergencias y evacuaciones.',
+    description: 'Lidera la formulación y articulación del Sistema Nacional de Gestión del Riesgo y los comités territoriales ante emergencias.',
     url: 'https://portal.gestiondelriesgo.gov.co',
     bulletinUrl: 'https://portal.gestiondelriesgo.gov.co/Paginas/Noticias.aspx',
-    borderColor: 'border-orange-500/40',
-    textColor: 'text-orange-400',
-    bgColor: 'bg-orange-500/5',
+    icon: AlertOctagon,
+    borderLight: 'border-orange-200 hover:border-orange-400',
+    borderDark: 'dark:border-orange-500/30 dark:hover:border-orange-500/60',
+    textLight: 'text-orange-800',
+    textDark: 'dark:text-orange-400',
+    bgLight: 'bg-orange-50/40',
+    bgDark: 'dark:bg-orange-950/20',
+    badgeLight: 'bg-orange-100/80 text-orange-900 border-orange-300',
+    badgeDark: 'dark:bg-orange-950/60 dark:text-orange-300 dark:border-orange-700/50',
     latestBulletin: {
       title: 'Situación de Temporada de Lluvias — Suroccidente Colombiano',
       date: '1 de octubre de 2026',
@@ -93,12 +134,18 @@ const INSTITUTIONS: Institution[] = [
     id: 'sgc',
     acronym: 'SGC',
     fullName: 'Servicio Geológico Colombiano',
-    description: 'Monitoreo volcánico, sismología y alertas geológicas a nivel nacional.',
+    description: 'Monitoreo e investigación de amenazas geológicas, sísmicas y de la actividad volcánica del complejo Puracé - Coconucos.',
     url: 'https://www.sgc.gov.co',
     bulletinUrl: 'https://www.sgc.gov.co/Noticias',
-    borderColor: 'border-red-500/40',
-    textColor: 'text-red-400',
-    bgColor: 'bg-red-500/5',
+    icon: Mountain,
+    borderLight: 'border-rose-200 hover:border-rose-400',
+    borderDark: 'dark:border-rose-500/30 dark:hover:border-rose-500/60',
+    textLight: 'text-rose-800',
+    textDark: 'dark:text-rose-400',
+    bgLight: 'bg-rose-50/40',
+    bgDark: 'dark:bg-rose-950/20',
+    badgeLight: 'bg-rose-100/80 text-rose-900 border-rose-300',
+    badgeDark: 'dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-700/50',
     latestBulletin: {
       title: 'Boletín de Actividad Volcán Puracé — Nivel Amarillo',
       date: '29 de septiembre de 2026',
@@ -110,12 +157,18 @@ const INSTITUTIONS: Institution[] = [
     id: 'dimar',
     acronym: 'DIMAR',
     fullName: 'Dirección General Marítima',
-    description: 'Boletines meteorológicos marítimos, fluviales y de oleaje para el Pacífico colombiano.',
+    description: 'Regula, vigila y monitorea las condiciones hidrometeorológicas marítimas, estuarinas y fluviales del Pacífico colombiano.',
     url: 'https://www.dimar.mil.co',
     bulletinUrl: 'https://www.dimar.mil.co/content/boletines-meteorol%C3%B3gicos-marinos',
-    borderColor: 'border-cyan-500/40',
-    textColor: 'text-cyan-400',
-    bgColor: 'bg-cyan-500/5',
+    icon: Anchor,
+    borderLight: 'border-cyan-200 hover:border-cyan-400',
+    borderDark: 'dark:border-cyan-500/30 dark:hover:border-cyan-500/60',
+    textLight: 'text-cyan-800',
+    textDark: 'dark:text-cyan-400',
+    bgLight: 'bg-cyan-50/40',
+    bgDark: 'dark:bg-cyan-950/20',
+    badgeLight: 'bg-cyan-100/80 text-cyan-900 border-cyan-300',
+    badgeDark: 'dark:bg-cyan-950/60 dark:text-cyan-300 dark:border-cyan-700/50',
     latestBulletin: {
       title: 'Boletín Meteorológico Marino — Pacífico Colombiano',
       date: '30 de septiembre de 2026',
@@ -126,63 +179,71 @@ const INSTITUTIONS: Institution[] = [
 ];
 
 function InstitutionCard({ inst }: { inst: Institution }) {
+  const IconComponent = inst.icon;
+
   return (
     <a
       href={inst.bulletinUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={`block rounded-xl border ${inst.borderColor} ${inst.bgColor} p-5 transition-all duration-200 hover:shadow-lg hover:shadow-black/30 hover:scale-[1.01] group`}
+      className={`block rounded-2xl border ${inst.borderLight} ${inst.borderDark} ${inst.bgLight} ${inst.bgDark} p-5 transition-all duration-200 shadow-xs hover:shadow-md hover:-translate-y-0.5 group`}
     >
-      {/* Header */}
-      <div className="mb-3 flex items-start justify-between">
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            <Globe className={`h-5 w-5 shrink-0 ${inst.textColor}`} />
-            <h3 className="text-lg font-bold text-slate-100">{inst.acronym}</h3>
+      {/* Cabecera institucional */}
+      <div className="mb-3 flex items-start justify-between gap-3">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="p-2 rounded-xl bg-white dark:bg-slate-900 shadow-2xs border border-slate-200/80 dark:border-slate-800 shrink-0">
+            <IconComponent className={`h-5 w-5 ${inst.textLight} ${inst.textDark}`} />
           </div>
-          <p className="mt-0.5 text-xs leading-snug text-slate-400">{inst.fullName}</p>
+          <div className="min-w-0">
+            <h3 className="text-base font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug">
+              {inst.acronym}
+            </h3>
+            <p className="text-[11px] leading-snug text-slate-500 dark:text-slate-400 line-clamp-1">
+              {inst.fullName}
+            </p>
+          </div>
         </div>
-        <span className={`ml-2 shrink-0 rounded-full border ${inst.borderColor} bg-slate-800/60 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-300`}>
-          Fuente Oficial
+        <span className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${inst.badgeLight} ${inst.badgeDark}`}>
+          Oficial
         </span>
       </div>
 
-      {/* Description */}
-      <p className="mb-4 text-xs text-slate-400 leading-relaxed">{inst.description}</p>
+      {/* Descripción técnica */}
+      <p className="mb-3.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+        {inst.description}
+      </p>
 
-      {/* Latest Bulletin */}
-      <div className="rounded-lg border border-slate-700/50 bg-slate-800/40 p-3.5">
-        <div className="mb-2 flex items-center gap-1.5">
-          <FileText className="h-3.5 w-3.5 text-slate-500" />
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
-            Último boletín
+      {/* Cuadro de Último Boletín */}
+      <div className="rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/70 p-3.5 shadow-2xs">
+        <div className="mb-1.5 flex items-center justify-between text-[10px] font-bold text-slate-500 dark:text-slate-400">
+          <span className="flex items-center gap-1 uppercase tracking-wider">
+            <FileText className="h-3 w-3" />
+            Último Boletín
           </span>
-        </div>
-
-        <h4 className="mb-2 text-sm font-semibold leading-snug text-slate-200">
-          {inst.latestBulletin.title}
-        </h4>
-
-        <p className="mb-3 text-xs leading-relaxed text-slate-400">
-          {inst.latestBulletin.summary}
-        </p>
-
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] text-slate-500">
-          <span className="flex items-center gap-1">
-            <CalendarDays className="h-3 w-3" />
-            {inst.latestBulletin.date}
-          </span>
-          <span className="flex items-center gap-1">
+          <span className="flex items-center gap-1 font-mono">
             <Hash className="h-3 w-3" />
             {inst.latestBulletin.bulletinNumber}
           </span>
         </div>
+
+        <h4 className="mb-1.5 text-xs font-bold text-slate-900 dark:text-slate-100 leading-snug group-hover:text-cyan-700 dark:group-hover:text-cyan-400 transition-colors">
+          {inst.latestBulletin.title}
+        </h4>
+
+        <p className="mb-2.5 text-[11px] leading-relaxed text-slate-600 dark:text-slate-400 line-clamp-2">
+          {inst.latestBulletin.summary}
+        </p>
+
+        <div className="flex items-center gap-1 text-[10px] font-medium text-slate-500 dark:text-slate-400 pt-1.5 border-t border-slate-100 dark:border-slate-800/60">
+          <CalendarDays className="h-3 w-3" />
+          <span>Emitido: {inst.latestBulletin.date}</span>
+        </div>
       </div>
 
-      {/* External Link */}
-      <div className={`mt-4 inline-flex items-center gap-1.5 text-sm font-medium ${inst.textColor} group-hover:underline`}>
-        Ver boletines oficiales
-        <ExternalLink className="h-3.5 w-3.5" />
+      {/* Enlace al sitio oficial */}
+      <div className={`mt-3.5 flex items-center justify-between text-xs font-bold ${inst.textLight} ${inst.textDark}`}>
+        <span>Consultar repositorio oficial</span>
+        <ExternalLink className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
       </div>
     </a>
   );
@@ -190,7 +251,7 @@ function InstitutionCard({ inst }: { inst: Institution }) {
 
 export function InstitutionalBulletins() {
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {INSTITUTIONS.map((inst) => (
         <InstitutionCard key={inst.id} inst={inst} />
       ))}
