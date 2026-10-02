@@ -4,6 +4,19 @@ import L from 'leaflet';
 import type { Subcuenca, RiskLevel } from '../types/sat';
 import { ExternalLink } from 'lucide-react';
 
+// Fix para el icono por defecto de Leaflet con bundlers
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+// @ts-ignore
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: markerIcon2x,
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+});
+
 interface HydrologicalMapProps {
   subcuencas: Subcuenca[];
   selectedSubcuencaId: string | null;
@@ -12,47 +25,28 @@ interface HydrologicalMapProps {
 }
 
 const createRiskIcon = (risk: RiskLevel) => {
-  const colors: Record<RiskLevel, { fill: string; stroke: string; glow: string }> = {
-    verde: { fill: '#10b981', stroke: '#059669', glow: 'rgba(16, 185, 129, 0.4)' },
-    amarillo: { fill: '#f59e0b', stroke: '#d97706', glow: 'rgba(245, 158, 11, 0.4)' },
-    naranja: { fill: '#f97316', stroke: '#ea580c', glow: 'rgba(249, 115, 22, 0.5)' },
-    rojo: { fill: '#ef4444', stroke: '#dc2626', glow: 'rgba(239, 68, 68, 0.6)' }
+  const colors: Record<RiskLevel, { fill: string; glow: string }> = {
+    verde: { fill: '#10b981', glow: 'rgba(16, 185, 129, 0.4)' },
+    amarillo: { fill: '#f59e0b', glow: 'rgba(245, 158, 11, 0.4)' },
+    naranja: { fill: '#f97316', glow: 'rgba(249, 115, 22, 0.5)' },
+    rojo: { fill: '#ef4444', glow: 'rgba(239, 68, 68, 0.6)' }
   };
 
   const c = colors[risk];
 
-  const html = `
-    <div style="
-      position: relative;
-      width: 28px;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    ">
-      <div style="
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: ${c.glow};
-        border-radius: 50%;
-        animation: pulse-ring 2s infinite;
-      "></div>
-      <div style="
-        position: relative;
-        width: 18px;
-        height: 18px;
-        background-color: ${c.fill};
-        border: 2.5px solid #ffffff;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-        border-radius: 50%;
-      "></div>
-    </div>
-  `;
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+      <circle cx="14" cy="14" r="13" fill="${c.glow}" opacity="0.6">
+        <animate attributeName="r" values="10;14;10" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.6;0.15;0.6" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="14" cy="14" r="7" fill="${c.fill}" stroke="white" stroke-width="2.5"/>
+    </svg>`;
 
-  return L.divIcon({
-    html,
-    className: 'custom-leaflet-marker',
+  const svgUrl = `data:image/svg+xml;base64,${btoa(svg)}`;
+
+  return L.icon({
+    iconUrl: svgUrl,
     iconSize: [28, 28],
     iconAnchor: [14, 14],
     popupAnchor: [0, -14]
@@ -74,10 +68,12 @@ export const HydrologicalMap: React.FC<HydrologicalMapProps> = ({
         zoom={12}
         scrollWheelZoom={true}
         className="w-full h-full"
+        style={{ background: '#1e293b' }}
       >
+        {/* OpenStreetMap estándar - 100% libre, sin API key */}
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
           maxZoom={19}
         />
 

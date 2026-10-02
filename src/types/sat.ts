@@ -62,3 +62,21 @@ export interface SATDashboardSummary {
   lastSystemSync: string;
   isOfflineMode: boolean;
 }
+
+export interface LatestBulletin {
+  title: string;
+  date: string;
+  summary: string;
+  bulletinNumber: string;
+}
+
+export interface InstitutionBulletin {
+  id: string;
+  acronym: string;
+  fullName: string;
+  description: string;
+  url: string;
+  bulletinUrl: string;
+  colorClass: string;
+  latestBulletin: LatestBulletin;
+}
