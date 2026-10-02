@@ -5,6 +5,20 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ============================================
+   PALETA INSTITUCIONAL UNIVERSIDAD DEL CAUCA
+   Rojo Colonial (#8B0000 / #991B1B)
+   Azul Ultramar (#0F2D59 / #1E3A8A)
+   Dorado Noble (#D97706 / #B45309)
+   ============================================ */
+:root {
+  --unicauca-red: #8B0000;
+  --unicauca-red-dark: #660000;
+  --unicauca-blue: #0F2D59;
+  --unicauca-blue-dark: #0A1C36;
+  --unicauca-gold: #C59B27;
+}
+
+/* ============================================
    TIPOGRAFÍA ACADÉMICA
    ============================================ */
 @layer base {
@@ -14,8 +28,8 @@
 
   body {
     @apply antialiased min-h-screen transition-colors duration-300;
-    @apply bg-slate-50 text-slate-700;
-    @apply dark:bg-slate-950 dark:text-slate-200;
+    @apply bg-slate-50 text-slate-800 selection:bg-red-800 selection:text-white;
+    @apply dark:bg-slate-950 dark:text-slate-100 dark:selection:bg-red-700 dark:selection:text-white;
   }
 }
 

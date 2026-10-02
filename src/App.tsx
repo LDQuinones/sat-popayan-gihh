@@ -1,17 +1,20 @@
 import { useState } from 'react';
 import { 
-  ShieldAlert, 
   RefreshCw, 
   Map, 
   Layers, 
   Info, 
-  PhoneCall,
-  GraduationCap,
-  Newspaper,
-  Bell,
-  Sun,
-  Moon,
-  ChevronDown
+  PhoneCall, 
+  GraduationCap, 
+  Newspaper, 
+  Bell, 
+  Sun, 
+  Moon, 
+  ChevronDown, 
+  ExternalLink, 
+  BookOpen,
+  Award,
+  Users2
 } from 'lucide-react';
 import { useSATData } from './hooks/useSATData';
 import { useTheme } from './hooks/useTheme';
@@ -67,40 +70,83 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 flex flex-col transition-colors duration-200 selection:bg-cyan-500 selection:text-white">
+    <div className="min-h-screen bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 flex flex-col transition-colors duration-200">
+      
+      {/* 1. BANNER INSTITUCIONAL: AVISO DE SOFTWARE EN DESARROLLO */}
+      <div className="bg-gradient-to-r from-red-900 via-red-800 to-blue-900 text-white text-xs sm:text-sm py-2 px-4 shadow-sm border-b border-red-700/50">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2 font-medium">
+            <span className="p-1 bg-amber-400 text-red-950 rounded font-bold text-[10px] tracking-wider uppercase shrink-0">
+              Fase Experimental
+            </span>
+            <span className="leading-snug">
+              <strong>Proyecto en Desarrollo:</strong> Este software es una iniciativa científica del <strong>GIHH - Universidad del Cauca</strong> orientada a proveer un entorno seguro y unificado para la interconexión con las alertas oficiales de las instituciones hidroambientales.
+            </span>
+          </div>
+          <span className="hidden md:inline-block text-[11px] opacity-80 shrink-0">
+            Facultad de Ingeniería Civil
+          </span>
+        </div>
+      </div>
+
       {/* Banner de datos nuevos si hubo cambio tras auto-sync */}
       {hasNewData && (
-        <div className="bg-cyan-700 text-white text-center py-2 px-4 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-sm animate-pulse">
+        <div className="bg-blue-800 text-white text-center py-2 px-4 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-sm animate-pulse">
           <Bell className="w-4 h-4" />
           Telemetría actualizada: Se han registrado variaciones hidrológicas en la red de Popayán.
         </div>
       )}
 
-      {/* Header Institucional Académico */}
-      <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-2xs transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-          {/* Identidad Institucional */}
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-gradient-to-br from-cyan-700 to-blue-900 text-white rounded-xl shadow-md">
-              <ShieldAlert className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-base sm:text-lg font-black tracking-tight text-slate-900 dark:text-white leading-tight">
+      {/* Header Institucional con Colores de la Universidad del Cauca */}
+      <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-red-900/10 dark:border-slate-800 shadow-xs transition-colors">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+          
+          {/* Identidad Institucional y Escudo */}
+          <div className="flex items-center space-x-3 min-w-0">
+            {/* Escudo Universidad del Cauca */}
+            <a 
+              href="https://www.unicauca.edu.co" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="p-1 rounded-xl bg-white border border-slate-200 dark:border-slate-700 shadow-2xs hover:scale-105 transition-transform shrink-0"
+              title="Portal Oficial Universidad del Cauca"
+            >
+              <img 
+                src="/Escudo_Universidad_cauca.png" 
+                alt="Escudo Universidad del Cauca" 
+                className="w-9 h-10 object-contain"
+              />
+            </a>
+
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h1 className="text-base sm:text-lg font-black tracking-tight text-red-950 dark:text-red-100 leading-tight">
                   SAT HIDROLÓGICO POPAYÁN
                 </h1>
-                <span className="hidden sm:inline-flex text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-500/20 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30">
-                  GIHH · UNICAUCA
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-red-100 text-red-900 dark:bg-red-950/60 dark:text-red-300 border border-red-200 dark:border-red-800/60">
+                  GIHH · FIC
                 </span>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                Sistema de Alerta Temprana ante Inundaciones y Avenidas Torrenciales
+              <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
+                Grupo de Investigación en Ingeniería Hidráulica e Hidrológica · Unicauca
               </p>
             </div>
           </div>
 
           {/* Controles de cabecera */}
-          <div className="flex items-center space-x-2 sm:space-x-3">
+          <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
+            {/* Enlace Institucional Directo Unicauca */}
+            <a
+              href="https://www.unicauca.edu.co"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-900 dark:bg-red-950/40 dark:hover:bg-red-900/50 dark:text-red-300 border border-red-200 dark:border-red-800/40 rounded-lg transition"
+              title="Ir al Portal Oficial de la Universidad del Cauca"
+            >
+              <span>Portal Unicauca</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+
             {/* Botón PWA */}
             <InstallPrompt />
 
@@ -125,7 +171,7 @@ export function App() {
               className="p-2 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-lg transition disabled:opacity-50 cursor-pointer"
               title="Sincronizar telemetría ahora (ciclo automático cada 5 min)"
             >
-              <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin text-cyan-600 dark:text-cyan-400' : ''}`} />
+              <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin text-red-700 dark:text-red-400' : ''}`} />
             </button>
 
             {/* Modal de Transparencia */}
@@ -133,8 +179,8 @@ export function App() {
               onClick={handleOpenGlobalProvenance}
               className="hidden md:flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-lg transition cursor-pointer"
             >
-              <Info className="w-3.5 h-3.5 text-cyan-700 dark:text-cyan-400" />
-              <span>Transparencia & Fuente</span>
+              <Info className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400" />
+              <span>Transparencia & Metrología</span>
             </button>
           </div>
         </div>
@@ -150,20 +196,20 @@ export function App() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-800">
             <div>
               <div className="flex items-center gap-2">
-                <Newspaper className="w-5 h-5 text-cyan-700 dark:text-cyan-400" />
+                <Newspaper className="w-5 h-5 text-red-800 dark:text-red-400" />
                 <h2 className="text-lg font-extrabold text-slate-900 dark:text-white tracking-tight">
                   Fuentes Oficiales y Boletines Institucionales
                 </h2>
               </div>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Acceso directo a los últimos informes técnicos oficiales de la CRC, IDEAM, IGAC, UNGRD, SGC y DIMAR
+                Acceso directo e intermediación a los últimos informes técnicos de la CRC, IDEAM, IGAC, UNGRD, SGC y DIMAR
               </p>
             </div>
 
-            {/* Acceso rápido hacia la clasificación de alertas */}
+            {/* Botón de acceso rápido al monitoreo */}
             <button
               onClick={scrollToAlerts}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-800 dark:text-cyan-300 hover:text-cyan-900 dark:hover:text-cyan-200 bg-cyan-50 dark:bg-cyan-950/50 hover:bg-cyan-100 dark:hover:bg-cyan-900/60 px-3 py-1.5 rounded-lg border border-cyan-200 dark:border-cyan-800/60 transition cursor-pointer self-start sm:self-auto"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-red-900 dark:text-red-300 hover:text-red-950 dark:hover:text-red-200 bg-red-50 dark:bg-red-950/50 hover:bg-red-100 dark:hover:bg-red-900/60 px-3 py-1.5 rounded-lg border border-red-200 dark:border-red-800/60 transition cursor-pointer self-start sm:self-auto"
             >
               <span>Ver Monitoreo de Cuencas en Vivo</span>
               <ChevronDown className="w-3.5 h-3.5" />
@@ -180,11 +226,11 @@ export function App() {
         <section id="seccion-alertas-hidrologicas" className="pt-4 space-y-6">
           <div className="pb-3 border-b border-slate-200 dark:border-slate-800">
             <h2 className="text-lg font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
-              <Layers className="w-5 h-5 text-cyan-700 dark:text-cyan-400" />
+              <Layers className="w-5 h-5 text-blue-800 dark:text-blue-400" />
               Monitoreo Hidrológico y Clasificación de Riesgo en Cuencas Abastecedoras
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Telemetría y semaforización en tiempo real para las subcuencas Río Molino, Palacé, Las Piedras, Cauca y Pisojé
+              Telemetría y semaforización continua para las subcuencas Río Molino, Palacé, Las Piedras, Cauca y Pisojé
             </p>
           </div>
 
@@ -200,7 +246,7 @@ export function App() {
             <div className="lg:col-span-7 space-y-2">
               <div className="flex items-center justify-between">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                  <Map className="w-4 h-4 text-cyan-700 dark:text-cyan-400" />
+                  <Map className="w-4 h-4 text-red-800 dark:text-red-400" />
                   Cartografía Telemétrica de Popayán
                 </h3>
                 <span className="text-[11px] text-slate-500 dark:text-slate-400">
@@ -219,7 +265,7 @@ export function App() {
             {/* Listado de Subcuencas y Clasificación Semafórica (5 cols) */}
             <div className="lg:col-span-5 space-y-2">
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                <Layers className="w-4 h-4 text-cyan-700 dark:text-cyan-400" />
+                <Layers className="w-4 h-4 text-blue-800 dark:text-blue-400" />
                 Clasificación de Alertas por Subcuenca
               </h3>
 
@@ -235,46 +281,169 @@ export function App() {
           </div>
         </section>
 
-        {/* Respaldo Científico Institucional */}
-        <div className="p-5 sm:p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs transition-colors">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="space-y-1">
-              <span className="text-xs font-bold uppercase tracking-wider text-cyan-800 dark:text-cyan-400 flex items-center gap-2">
-                <GraduationCap className="w-4 h-4" /> Soporte Científico y Operativo
-              </span>
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                Grupo de Investigación de Ingeniería Hidráulica e Hidrológica (GIHH) · Universidad del Cauca
-              </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
-                Este sistema consolida datos procedentes de limnígrafos de radar en tiempo real, redes LoRaWAN y boletines emitidos por IDEAM, CRC, SGC y UNGRD. El algoritmo valida las mediciones y actualiza la clasificación de alerta cada 5 minutos; si no se detectan variaciones, la vista permanece inmutable para evitar parpadeos y preservar el estado del usuario.
+        {/* ======================================================== */}
+        {/* 3. SECCIÓN DETALLADA DEL GRUPO DE INVESTIGACIÓN (GIHH)   */}
+        {/* ======================================================== */}
+        <section className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm transition-colors">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            {/* Columna Izquierda: Información Académica y Scienti MinCiencias */}
+            <div className="lg:col-span-8 space-y-5">
+              
+              <div className="flex items-center gap-3">
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-red-100 text-red-900 dark:bg-red-950/60 dark:text-red-300 border border-red-200 dark:border-red-800/60 inline-flex items-center gap-1.5">
+                  <GraduationCap className="w-4 h-4" /> MinCiencias: COL0010048
+                </span>
+                <span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-900 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800/60 inline-flex items-center gap-1.5">
+                  <Award className="w-4 h-4" /> Categoría A MinCiencias
+                </span>
+              </div>
+
+              <div>
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white leading-tight">
+                  Grupo de Investigación en Ingeniería Hidráulica e Hidrológica (GIHH)
+                </h3>
+                <p className="text-sm font-semibold text-red-900 dark:text-red-400 mt-1">
+                  Facultad de Ingeniería Civil · Universidad del Cauca · Popayán, Colombia
+                </p>
+              </div>
+
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed text-justify">
+                El <strong>GIHH</strong> lidera la investigación científica en hidrología de cuencas de montaña, hidráulica fluvial, modelación hidrodinámica y gestión del riesgo de desastres en el suroccidente colombiano. Como parte de sus líneas de investigación en <em>Modelación Hidrológica y Alertas Tempranas</em>, este sistema busca consolidar un entorno tecnológicamente seguro y accesible para la articulación en tiempo real entre comunidades, autoridades ambientales y entidades de socorro.
               </p>
+
+              {/* Tarjetas de áreas de experticia */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                <div className="p-3.5 bg-slate-50 dark:bg-slate-950/50 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <BookOpen className="w-4 h-4 text-red-800 dark:text-red-400 mb-1.5" />
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">Modelación Hidráulica</h4>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
+                    Simulación de tránsito de crecientes, aforos y curvas IDF para cuencas andinas.
+                  </p>
+                </div>
+
+                <div className="p-3.5 bg-slate-50 dark:bg-slate-950/50 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <Users2 className="w-4 h-4 text-blue-800 dark:text-blue-400 mb-1.5" />
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">Gestión del Riesgo</h4>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
+                    Zonificación de amenazas torrenciales e inundaciones para Popayán y municipios del Cauca.
+                  </p>
+                </div>
+
+                <div className="p-3.5 bg-slate-50 dark:bg-slate-950/50 rounded-xl border border-slate-200 dark:border-slate-800">
+                  <Award className="w-4 h-4 text-amber-700 dark:text-amber-400 mb-1.5" />
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">Telemetría e IoT</h4>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
+                    Diseño de nodos sensores limnimétricos y redes LoRaWAN de bajo costo en cuenca alta.
+                  </p>
+                </div>
+              </div>
+
+              {/* Botones de acción institucional */}
+              <div className="flex flex-wrap gap-3 pt-2">
+                <a
+                  href="https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002148"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 bg-red-900 hover:bg-red-800 text-white rounded-xl text-xs font-bold shadow-sm transition hover:scale-102"
+                >
+                  <Award className="w-4 h-4" />
+                  <span>Ver Ficha Oficial GrupLAC (MinCiencias)</span>
+                  <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                </a>
+
+                <a
+                  href="https://www.unicauca.edu.co"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-750 text-slate-800 dark:text-slate-200 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-700 transition"
+                >
+                  <span>Universidad del Cauca</span>
+                  <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+                </a>
+              </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto shrink-0">
-              <a
-                href="tel:119"
-                className="flex items-center justify-center gap-2 px-4 py-2 bg-rose-50 hover:bg-rose-100 text-rose-800 dark:bg-rose-600/20 dark:hover:bg-rose-600/30 dark:text-rose-300 border border-rose-200 dark:border-rose-500/40 rounded-xl text-xs font-bold transition"
-              >
-                <PhoneCall className="w-4 h-4" /> Bomberos Popayán (119)
-              </a>
-              <a
-                href="tel:132"
-                className="flex items-center justify-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold transition"
-              >
-                Cruz Roja Cauca (132)
-              </a>
+            {/* Columna Derecha: Imagen de la Facultad de Ingeniería Civil y Escudo */}
+            <div className="lg:col-span-4 flex flex-col items-center gap-4">
+              <div className="w-full max-w-sm rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-md bg-white dark:bg-slate-950 p-2">
+                <img 
+                  src="/FIC.jpg" 
+                  alt="Facultad de Ingeniería Civil - Universidad del Cauca" 
+                  className="w-full h-48 object-cover rounded-xl"
+                />
+                <div className="p-3 text-center">
+                  <p className="text-xs font-bold text-slate-900 dark:text-white">
+                    Facultad de Ingeniería Civil
+                  </p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                    Sede Tulcán · Universidad del Cauca
+                  </p>
+                </div>
+              </div>
+
+              {/* Botones de socorro y emergencia de Popayán */}
+              <div className="w-full max-w-sm flex gap-2">
+                <a
+                  href="tel:119"
+                  className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-rose-50 hover:bg-rose-100 text-rose-800 dark:bg-rose-600/20 dark:hover:bg-rose-600/30 dark:text-rose-300 border border-rose-200 dark:border-rose-500/40 rounded-xl text-xs font-bold transition text-center"
+                >
+                  <PhoneCall className="w-3.5 h-3.5 shrink-0" /> Bomberos (119)
+                </a>
+                <a
+                  href="tel:132"
+                  className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-800 dark:hover:bg-slate-750 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-bold transition text-center"
+                >
+                  Cruz Roja (132)
+                </a>
+              </div>
             </div>
+
           </div>
-        </div>
+        </section>
+
       </main>
 
-      {/* Footer */}
-      <footer className="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 py-4 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>&copy; {new Date().getFullYear()} GIHH · Universidad del Cauca · Popayán, Colombia</span>
-          <span className="text-slate-500 dark:text-slate-400 font-medium">
-            PWA con Operación Fuera de Línea (Workbox) · Ciclo de Actualización 5 min
-          </span>
+      {/* Footer Institucional Unicauca */}
+      <footer className="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 py-6 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <img 
+              src="/Escudo_Universidad_cauca.png" 
+              alt="Unicauca" 
+              className="w-7 h-8 object-contain"
+            />
+            <div className="text-left">
+              <p className="font-bold text-slate-800 dark:text-slate-200">
+                Universidad del Cauca · Popayán, Colombia
+              </p>
+              <p className="text-[11px] text-slate-500">
+                Grupo de Investigación en Ingeniería Hidráulica e Hidrológica (GIHH) · Facultad de Ingeniería Civil
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 text-xs">
+            <a 
+              href="https://www.unicauca.edu.co" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-red-800 dark:hover:text-red-400 font-semibold underline decoration-slate-300"
+            >
+              www.unicauca.edu.co
+            </a>
+            <span>·</span>
+            <a 
+              href="https://scienti.minciencias.gov.co/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002148" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-red-800 dark:hover:text-red-400 font-semibold underline decoration-slate-300"
+            >
+              GrupLAC MinCiencias
+            </a>
+            <span>·</span>
+            <span>PWA Offline Workbox</span>
+          </div>
         </div>
       </footer>
 
